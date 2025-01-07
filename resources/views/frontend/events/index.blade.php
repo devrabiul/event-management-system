@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title', 'Student List')
+@section('title', 'Event List')
 
 @section('content')
 <div class="container">
@@ -9,44 +9,38 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="m-0">Add/Edit Student</h6>
+                    <h6 class="m-0">Add Event</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('frontend.student-add') }}" method="POST">
+                    <form action="{{ route('frontend.events.store') }}" method="POST">
                         @csrf
                         <div class="row g-2">
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-6">
                                 <label for="name" class="form-label">
                                     Name
                                     <span class="required-icon">*</span>
                                 </label>
                                 <input type="text" class="form-control" id="name" name="name"
-                                    placeholder="Enter student's name" required>
+                                    placeholder="Enter event's name" required>
                             </div>
 
-                            <div class="col-md-4 col-lg-3">
-                                <label for="email" class="form-label">
-                                    Email
+                            <div class="col-md-6">
+                                <label for="date" class="form-label">
+                                    Date
                                     <span class="required-icon">*</span>
                                 </label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="Enter student's email" required>
+                                <input type="date" class="form-control" id="date" name="date" value="{{ old('date') }}"
+                                    placeholder="Enter event's date" required>
                             </div>
 
-                            <div class="col-md-4 col-lg-3">
-                                <label for="phone" class="form-label">
-                                    Phone
+                            <div class="col-md-12">
+                                <label for="description" class="form-label">
+                                    Description
                                     <span class="required-icon">*</span>
                                 </label>
-                                <input type="text" class="form-control" id="phone" name="phone"
-                                    placeholder="Enter student's phone number" required>
+                                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter event's description">{{ old('description') }}</textarea>
                             </div>
 
-                            <div class="col-md-4 col-lg-3">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address" name="address"
-                                    placeholder="Enter student's address">
-                            </div>
 
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-sm btn-outline-primary">
@@ -67,7 +61,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="m-0">Student List</h6>
+                    <h6 class="m-0">Event List</h6>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped table-hover table-bordered m-0">
@@ -75,40 +69,42 @@
                             <tr>
                                 <th class="text-center">Serial</th>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Address</th>
+                                <th>Date</th>
+                                <th>Description</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($students as $key => $student)
+                            @forelse ($events as $key => $event)
                             <tr>
-                                <td class="text-center">{{ $students->firstitem() + $key }}</td>
-                                <td>{{ $student->name }}</td>
-                                <td>{{ $student->email }}</td>
-                                <td>{{ $student->phone }}</td>
-                                <td>{{ $student->address }}</td>
+                                <td class="text-center">{{ $events->firstitem() + $key }}</td>
+                                <td>{{ $event->name }}</td>
+                                <td>{{ $event->date }}</td>
+                                <td>{{ Str::limit($event->description, 25, '...') }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('frontend.student-edit', ['id' => $student->id]) }}" class="btn btn-primary btn-sm">
+                                    <a href="{{ route('frontend.events.show', ['id' => $event->id]) }}" class="btn btn-secondary btn-sm">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </a>
+
+                                    <a href="{{ route('frontend.events.edit', ['id' => $event->id]) }}" class="btn btn-primary btn-sm">
                                         <i class="fa-regular fa-pen-to-square"></i>
                                     </a>
 
-                                    <a href="{{ route('frontend.student-delete', ['id' => $student->id]) }}" class="btn btn-danger btn-sm">
+                                    <a href="{{ route('frontend.events.delete', ['id' => $event->id]) }}" class="btn btn-danger btn-sm">
                                         <i class="fa-regular fa-trash-can"></i>
                                     </a>
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6" class="text-center py-5">No students found.</td>
+                                <td colspan="6" class="text-center py-5">No events found.</td>
                             </tr>
                             @endforelse
                         </tbody>
                     </table>
 
                     <div class="d-flex justify-content-center py-2">
-                        {!! $students->links() !!}
+                        {!! $events->links() !!}
                     </div>
                 </div>
             </div>

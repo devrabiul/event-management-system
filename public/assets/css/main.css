@@ -29,7 +29,7 @@
 }
 
 .card-image-box {
-    aspect-ratio: 4 / 2;
+    aspect-ratio: 4 / 2.5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,12 +37,12 @@
     border-radius: 3px;
 }
 
-.course-card .card-title {
+.event-card .card-title {
     margin: 0;
     padding: .5rem 0;
 }
 
-.course-card .card-text {
+.event-card .card-text {
     font-size: .85rem;
     padding-bottom: 0;
     margin-bottom: .5rem;
@@ -125,12 +125,29 @@ tbody {
     min-height: 70vh;
 }
 
+.min-height-70vh {
+    min-height: 70vh;
+}
+
+.min-height-90vh {
+    min-height: 90vh;
+}
+
+
 @media (max-width: 768px) {
     .header-text .title {
         font-size: 2rem;
     }
 
     .header-section {
+        min-height: unset;
+    }
+
+    .min-height-70vh {
+        min-height: unset;
+    }
+
+    .min-height-90vh {
         min-height: unset;
     }
 }

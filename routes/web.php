@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\Frontend\EventController;
 use App\Http\Controllers\Frontend\FrontendHomeController;
-use App\Http\Controllers\Frontend\StudentController;
-use App\Http\Controllers\Frontend\CourseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,21 +22,11 @@ Route::controller(FrontendHomeController::class)->group(function() {
     Route::get('/', 'index')->name('frontend.index');
 });
 
-Route::controller(StudentController::class)->group(function() {
-    Route::get('student-list', 'index')->name('frontend.student-list');
-    Route::post('student-add', 'addStudent')->name('frontend.student-add');
-    Route::get('student-edit', 'edit')->name('frontend.student-edit');
-    Route::post('student-update', 'update')->name('frontend.student-update');
-    Route::get('student-delete', 'destroy')->name('frontend.student-delete');
-});
-
-Route::controller(CourseController::class)->group(function() {
-    Route::get('course-list', 'index')->name('frontend.course-list');
-    Route::post('course-add', 'addStudent')->name('frontend.course-add');
-    Route::get('course-view', 'viewCourse')->name('frontend.course-view');
-    Route::get('course-edit', 'edit')->name('frontend.course-edit');
-    Route::post('course-update', 'update')->name('frontend.course-update');
-    Route::get('course-delete', 'destroy')->name('frontend.course-delete');
-    Route::post('course-assign', 'courseAssign')->name('frontend.course-assign');
-    Route::get('course-assign-delete', 'deleteAssign')->name('frontend.course-assign-delete');
+Route::controller(EventController::class)->group(function() {
+    Route::get('/events',  'index')->name('frontend.events.index');
+    Route::post('/events',  'store')->name('frontend.events.store');
+    Route::get('/events/{id}',  'show')->name('frontend.events.show');
+    Route::get('/events/edit/{id}',  'edit')->name('frontend.events.edit');
+    Route::post('/events/update',  'update')->name('frontend.events.update');
+    Route::get('/events/delete/{id}',  'destroy')->name('frontend.events.delete');
 });

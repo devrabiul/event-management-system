@@ -16,14 +16,10 @@
                                 Home
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('student-list*') ? 'active' : '' }}" href="{{ route('frontend.student-list') }}">
-                                Student List
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('course-list*') ? 'active' : '' }}" href="{{ route('frontend.course-list') }}">
-                                Course List
+                            <a class="nav-link {{ Request::is('events*') ? 'active' : '' }}" href="{{ route('frontend.events.index') }}">
+                                Event List
                             </a>
                         </li>
                     </ul>
