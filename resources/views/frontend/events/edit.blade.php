@@ -31,6 +31,31 @@
                         </div>
 
                         <div class="col-md-12">
+                            <label for="type" class="form-label">
+                                Type
+                                <span class="required-icon">*</span>
+                            </label>
+                            <select class="form-select form-control-sm" name="type" id="type">
+                                <option value="">Select Type</option>
+                                <option value="conference" {{ $event->type == 'conference' ? 'selected' : '' }}>Conference</option>
+                                <option value="workshop" {{ $event->type == 'workshop' ? 'selected' : '' }}>Workshop</option>
+                                <option value="seminar" {{ $event->type == 'seminar' ? 'selected' : '' }}>Seminar</option>
+                                <option value="wedding" {{ $event->type == 'wedding' ? 'selected' : '' }}>Wedding</option>
+                                <option value="birthday" {{ $event->type == 'birthday' ? 'selected' : '' }}>Birthday</option>
+                                <option value="concert" {{ $event->type == 'concert' ? 'selected' : '' }}>Concert</option>
+                                <option value="festival" {{ $event->type == 'festival' ? 'selected' : '' }}>Festival</option>
+                                <option value="meeting" {{ $event->type == 'meeting' ? 'selected' : '' }}>Meeting</option>
+                                <option value="party" {{ $event->type == 'party' ? 'selected' : '' }}>Party</option>
+                                <option value="webinar" {{ $event->type == 'webinar' ? 'selected' : '' }}>Webinar</option>
+                                <option value="exhibition" {{ $event->type == 'exhibition' ? 'selected' : '' }}>Exhibition</option>
+                                <option value="fundraiser" {{ $event->type == 'fundraiser' ? 'selected' : '' }}>Fundraiser</option>
+                                <option value="sports_event" {{ $event->type == 'sports_event' ? 'selected' : '' }}>Sports Event</option>
+                                <option value="training" {{ $event->type == 'training' ? 'selected' : '' }}>Training</option>
+                                <option value="networking" {{ $event->type == 'networking' ? 'selected' : '' }}>Networking</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12">
                             <label for="description" class="form-label">
                                 Description
                                 <span class="required-icon">*</span>

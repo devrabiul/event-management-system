@@ -13,7 +13,8 @@ class Event extends Model
         'name',
         'description',
         'date',
+        'type',
     ];
 
-    
+
 }

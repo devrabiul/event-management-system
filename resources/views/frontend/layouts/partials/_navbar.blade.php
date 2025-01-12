@@ -10,7 +10,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-0 ms-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-0 ms-auto mb-2 mb-lg-0 gap-4">
+
                         <li class="nav-item">
                             <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('frontend.index') }}">
                                 Home
@@ -22,6 +23,26 @@
                                 Event List
                             </a>
                         </li>
+
+                        @if(count(getEventTypes()) > 0)
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Event Types
+                                    </div>
+                                    <ul class="dropdown-menu">
+                                        @foreach(getEventTypes() as $type)
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('frontend.events.index', ['type' => $type]) }}">
+                                                    {{ ucwords($type) }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
+
                     </ul>
                 </div>
             </div>

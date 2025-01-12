@@ -8,17 +8,20 @@ use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
-    public function index()
-{
-    $events = Event::paginate(10);
-    return view('frontend.events.index', compact('events'));
-}
+    public function index(Request $request)
+    {
+        $events = Event::when(\request('type'), function ($query) use ($request) {
+            return $query->where('type', $request['type']);
+        })->paginate(10);
+        return view('frontend.events.index', compact('events'));
+    }
 
 public function store(Request $request)
 {
     $request->validate([
         'name' => 'required|string|max:255',
         'date' => 'required|date',
+        'type' => 'required',
     ]);
 
     Event::create($request->all());
@@ -46,12 +49,14 @@ public function update(Request $request)
     $request->validate([
         'name' => 'required|string|max:255',
         'date' => 'required|date',
+        'type' => 'required',
     ]);
 
     Event::where('id', $request['id'])->update([
         'name' => $request['name'],
         'date' => $request['date'],
         'description' => $request['description'],
+        'type' => $request['type'],
     ]);
     return redirect()->route('frontend.events.index')->with('success', 'Event updated successfully.');
 }

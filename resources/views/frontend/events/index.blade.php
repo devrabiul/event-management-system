@@ -34,6 +34,32 @@
                             </div>
 
                             <div class="col-md-12">
+                                <label for="type" class="form-label">
+                                    Type
+                                    <span class="required-icon">*</span>
+                                </label>
+                                <select class="form-select form-control-sm" name="type" id="type">
+                                    <option value="">Select Type</option>
+                                    <option value="conference">Conference</option>
+                                    <option value="workshop">Workshop</option>
+                                    <option value="seminar">Seminar</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="birthday">Birthday</option>
+                                    <option value="concert">Concert</option>
+                                    <option value="festival">Festival</option>
+                                    <option value="meeting">Meeting</option>
+                                    <option value="party">Party</option>
+                                    <option value="webinar">Webinar</option>
+                                    <option value="exhibition">Exhibition</option>
+                                    <option value="fundraiser">Fundraiser</option>
+                                    <option value="sports_event">Sports Event</option>
+                                    <option value="training">Training</option>
+                                    <option value="networking">Networking</option>
+                                </select>
+                            </div>
+
+
+                            <div class="col-md-12">
                                 <label for="description" class="form-label">
                                     Description
                                     <span class="required-icon">*</span>
@@ -59,6 +85,11 @@
         </div>
 
         <div class="col-md-12">
+            <h5 class="mb-3">
+                @if(request('type'))
+                    Event List For : {{ ucwords(str_replace('_', '', request('type'))) }}
+                @endif
+            </h5>
             <div class="card">
                 <div class="card-header">
                     <h6 class="m-0">Event List</h6>
@@ -70,6 +101,7 @@
                                 <th class="text-center">Serial</th>
                                 <th>Name</th>
                                 <th>Date</th>
+                                <th>Type</th>
                                 <th>Description</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -80,6 +112,7 @@
                                 <td class="text-center">{{ $events->firstitem() + $key }}</td>
                                 <td>{{ $event->name }}</td>
                                 <td>{{ $event->date }}</td>
+                                <td>{{ ucwords(str_replace('_', '', $event->type)) }}</td>
                                 <td>{{ Str::limit($event->description, 25, '...') }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('frontend.events.show', ['id' => $event->id]) }}" class="btn btn-secondary btn-sm">

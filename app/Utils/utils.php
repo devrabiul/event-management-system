@@ -10,3 +10,10 @@ if (!function_exists('getDynamicAsset')) {
         }
     }
 }
+
+if (!function_exists('getEventTypes')) {
+    function getEventTypes()
+    {
+        return \App\Models\Event::get()?->pluck('type')?->toArray();
+    }
+}
